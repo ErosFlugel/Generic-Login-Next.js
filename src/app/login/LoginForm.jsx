@@ -28,6 +28,7 @@ export default function LoginForm() {
   const primaryBlue = 'blue.500'; // A bright blue for the button
   const textColor = 'white';
 
+  // The undefined arg is the initial state of the "state" variable, useActionState we use for knowing the state while performing the form action
   const [state, loginAction] = useActionState(login, undefined);
 
   return (

@@ -3,12 +3,11 @@
 import { z } from 'zod';
 import { createSession, deleteSession } from '../lib/session';
 import { redirect } from 'next/navigation';
+import users from '@/src/data/users.json';
+import { hashString, verifyHash } from '@/src/utils/handleHash';
 
-const testUser = {
-  id: '1',
-  email: 'contact@cosdensolutions.io',
-  password: '12345678',
-};
+// default firstuser password -> 12345678
+const firstUser = users[0];
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }).trim(),
@@ -26,7 +25,9 @@ export async function login(prevState, formData) {
 
   const { email, password } = result.data;
 
-  if (email !== testUser.email || password !== testUser.password) {
+  const hashVerified = await verifyHash(password, firstUser.password);
+
+  if (email !== firstUser.email || !hashVerified) {
     return {
       errors: {
         email: ['Invalid email or password'],
@@ -34,7 +35,7 @@ export async function login(prevState, formData) {
     };
   }
 
-  await createSession(testUser.id);
+  await createSession(firstUser.id);
 
   redirect('/dashboard');
 }
