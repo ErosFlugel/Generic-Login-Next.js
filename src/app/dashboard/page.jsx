@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { logout } from '../login/actions';
-import { Flex, Stack, Button } from '@chakra-ui/react';
+import { Flex, Stack, Button, Box, Center } from '@chakra-ui/react';
+import HtmlContentWrapper from '@/src/components/HtmlContentWrapper';
 
 export default function Dashboard() {
   const [loggingOut, setLoggingOut] = useState(false);
@@ -13,12 +14,10 @@ export default function Dashboard() {
   }
 
   return (
-    <div>
+    <>
       <Flex
-        minH={'100vh'}
-        align={'center'}
-        justify={'center'}
-        bg={'#0A1931'} // Very dark blue background for the whole page
+        gap={4}
+        direction={'column'}
       >
         <Stack
           spacing={8}
@@ -40,7 +39,12 @@ export default function Dashboard() {
           </Button>
           {/* <button onClick={() => logout()}>Logout</button> */}
         </Stack>
+        <Center>
+          <Box>
+            <HtmlContentWrapper basePath='/Juan/' />
+          </Box>
+        </Center>
       </Flex>
-    </div>
+    </>
   );
 }
