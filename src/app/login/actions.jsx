@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { createSession, deleteSession } from '../lib/session';
 import { redirect } from 'next/navigation';
 import users from '@/src/data/users.json';
-import { hashString, verifyHash } from '@/src/utils/handleHash';
+import { verifyHash } from '@/src/utils/handleHash';
 
 // default firstuser password -> 12345678
 const firstUser = users[0];
